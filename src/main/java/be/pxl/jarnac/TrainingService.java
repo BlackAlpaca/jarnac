@@ -2,10 +2,7 @@ package be.pxl.jarnac;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -57,6 +54,16 @@ public class TrainingService {
        } catch (Exception ex){
            return ResponseEntity.badRequest().build();
        }
+    }
+
+    @DeleteMapping(path = "/training/delete/{id}")
+    private ResponseEntity deleteTraining(@PathVariable("id") int id){
+        try{
+            trainingRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }
